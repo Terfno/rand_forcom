@@ -1,0 +1,45 @@
+import random
+
+
+def genList(c, o):
+    t = []  # team
+    tl = []  # team list
+    tll = []  # list of team list
+
+    for k in range(8):
+        for j in range(8):
+            for i in range(8):
+                if i % 2 == 0:
+                    t.append(c[i])
+                    t.append(c[i+1])
+                    t.append(o[i])
+                    t.append(o[i+1])
+                    tl.append(t)
+                    t = []
+            tll.append(tl)
+            tl = []
+
+            cache_c = c[0]
+            c.pop(0)
+            c.append(cache_c)
+        cache_o = o[0]
+        o.pop(0)
+        o.append(cache_o)
+
+    return tll
+
+
+def choicePattern(ltl):
+    rnd = random.randrange(len(ltl))
+    print("今回のチーム"+str(ltl[rnd]))
+    ltl.pop(rnd)
+
+    return ltl
+
+
+# member list
+c = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+o = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+
+nextlist = choicePattern(genList(c, o))
+print(nextlist)
